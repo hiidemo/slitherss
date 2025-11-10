@@ -4,6 +4,7 @@ pub fn intersect_circle(x1: f32, y1: f32, x2: f32, y2: f32, r: f32) -> bool {
     dx * dx + dy * dy < r * r
 }
 
+#[allow(dead_code)]
 pub fn distance_squared(x1: f32, y1: f32, x2: f32, y2: f32) -> f32 {
     let dx = x1 - x2;
     let dy = y1 - y2;

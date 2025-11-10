@@ -4,6 +4,7 @@ pub type SnakeId = u16;
 
 #[derive(Debug, Clone)]
 pub struct WorldConfig {
+    #[allow(dead_code)]
     pub bots: u16,
     pub snake_average_length: u16,
     pub snake_min_length: u16,

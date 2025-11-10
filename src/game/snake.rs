@@ -6,8 +6,10 @@ use std::f32::consts::PI;
 
 const CHANGE_POS: u8 = 1;
 const CHANGE_ANGLE: u8 = 1 << 1;
+#[allow(dead_code)]
 const CHANGE_WANGLE: u8 = 1 << 2;
 const CHANGE_SPEED: u8 = 1 << 3;
+#[allow(dead_code)]
 const CHANGE_FULLNESS: u8 = 1 << 4;
 const CHANGE_DYING: u8 = 1 << 5;
 const CHANGE_DEAD: u8 = 1 << 6;
@@ -45,6 +47,7 @@ pub struct Snake {
     pub sbb: SnakeBoundBox,
     pub vp: ViewPort,
     pub parts: Vec<Body>,
+    #[allow(dead_code)]
     pub eaten: FoodSeq,
     pub spawn: FoodSeq,
     pub client_parts_index: usize,
@@ -63,13 +66,16 @@ pub struct Snake {
 
 impl Snake {
     // Constants
+    #[allow(dead_code)]
     pub const SPANGDV: f32 = 4.8;
     pub const NSP1: f32 = 5.39;
     pub const NSP2: f32 = 0.4;
+    #[allow(dead_code)]
     pub const NSP3: f32 = 14.0;
     pub const BASE_MOVE_SPEED: u16 = 185;
     pub const BOOST_SPEED: u16 = 448;
     pub const SPEED_ACCELERATION: u16 = 1000;
+    #[allow(dead_code)]
     pub const PREY_ANGULAR_SPEED: f32 = 3.5;
     pub const SNAKE_ANGULAR_SPEED: f32 = 4.125;
     pub const SNAKE_TAIL_K: f32 = 0.43;
@@ -316,6 +322,7 @@ impl Snake {
         self.vp.bound_box.pos.r = WorldConfig::SECTOR_DIAG_SIZE as f32 * 3.0;
     }
 
+    #[allow(dead_code)]
     pub fn increase_snake(&mut self, volume: u16) {
         let parts_to_add = (volume / 100).max(1);
         for _ in 0..parts_to_add {
@@ -353,18 +360,22 @@ impl Snake {
         self.sbpr = 14.5;
     }
 
+    #[allow(dead_code)]
     pub fn get_snake_scale(&self) -> f32 {
         self.gsc
     }
 
+    #[allow(dead_code)]
     pub fn get_snake_body_part_radius(&self) -> f32 {
         self.sbpr
     }
 
+    #[allow(dead_code)]
     pub fn get_snake_score(&self) -> u16 {
         (15.0 * (self.parts.len() as f32 / 10.0).floor()) as u16
     }
 
+    #[allow(dead_code)]
     pub fn intersect(&self, other: &BoundBoxPos) -> bool {
         self.sbb.bound_box.pos.intersect(other)
     }

@@ -1,5 +1,5 @@
 use crate::config::{Config, SnakeId};
-use crate::game::World;
+use crate::game::world::World;
 use crate::packet::*;
 use futures_util::{SinkExt, StreamExt};
 use log::{info, warn};
@@ -18,10 +18,12 @@ type BroadcastSender = mpsc::UnboundedSender<Vec<u8>>;
 
 #[derive(Clone)]
 pub struct Session {
+    #[allow(dead_code)]
     pub snake_id: SnakeId,
     pub name: String,
     pub protocol_version: u8,
     pub skin: u8,
+    #[allow(dead_code)]
     pub last_packet_time: Instant,
     pub sender: BroadcastSender,
 }

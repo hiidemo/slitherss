@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Copy)]
+#[allow(dead_code)]
 pub struct Food {
     pub x: u16,
     pub y: u16,

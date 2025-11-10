@@ -20,6 +20,7 @@ pub enum InPacketType {
 // Outgoing packet types (to client)
 #[derive(Debug, Clone, Copy)]
 #[repr(u8)]
+#[allow(dead_code)]
 pub enum OutPacketType {
     Init = b'a',               // Initial setup
     RotCCWWangSp = b'E',       // Rotation variants
@@ -383,11 +384,13 @@ impl PacketRotation {
 }
 
 /// End/death packet ('v')
+#[allow(dead_code)]
 pub struct PacketEnd {
     pub base: PacketBase,
     pub status: u8, // 0 = normal, 1 = death
 }
 
+#[allow(dead_code)]
 impl PacketEnd {
     pub fn death() -> Self {
         Self {

@@ -1,7 +1,7 @@
 use crate::config::{SnakeId, WorldConfig};
 use crate::game::food::Food;
 use crate::game::math;
-use crate::game::sector::{BoundBoxPos, SectorSeq};
+use crate::game::sector::SectorSeq;
 use crate::game::snake::{Body, Snake};
 use rand::{Rng, SeedableRng};
 use rand::rngs::StdRng;
@@ -178,6 +178,7 @@ impl World {
         }
     }
 
+    #[allow(dead_code)]
     pub fn add_snake(&mut self, snake: Snake) {
         self.snakes.insert(snake.id, snake);
     }
@@ -199,18 +200,22 @@ impl World {
         &self.snakes
     }
 
+    #[allow(dead_code)]
     pub fn get_snakes_mut(&mut self) -> &mut HashMap<SnakeId, Snake> {
         &mut self.snakes
     }
 
+    #[allow(dead_code)]
     pub fn get_sectors(&self) -> &SectorSeq {
         &self.sectors
     }
 
+    #[allow(dead_code)]
     pub fn get_sectors_mut(&mut self) -> &mut SectorSeq {
         &mut self.sectors
     }
 
+    #[allow(dead_code)]
     pub fn get_dead(&self) -> &Vec<SnakeId> {
         &self.dead
     }
@@ -219,6 +224,7 @@ impl World {
         &self.changes
     }
 
+    #[allow(dead_code)]
     pub fn flush_changes(&mut self) {
         self.changes.clear();
         self.dead.clear();

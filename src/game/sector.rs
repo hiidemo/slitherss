@@ -20,6 +20,7 @@ impl BoundBoxPos {
 }
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct BoundBox {
     pub pos: BoundBoxPos,
     pub id: SnakeId,
@@ -45,12 +46,14 @@ impl BoundBox {
         self.sectors.contains(&sector_idx)
     }
 
+    #[allow(dead_code)]
     pub fn sort_sectors(&mut self) {
         self.sectors.sort_unstable();
     }
 }
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct Sector {
     pub x: u8,
     pub y: u8,
@@ -84,10 +87,12 @@ impl Sector {
         self.food.push(food);
     }
 
+    #[allow(dead_code)]
     pub fn remove_snake(&mut self, id: SnakeId) {
         self.snakes.retain(|&snake_id| snake_id != id);
     }
 
+    #[allow(dead_code)]
     pub fn sort_food(&mut self) {
         self.food.sort_by_key(|f| f.x);
     }
@@ -124,6 +129,7 @@ impl SectorSeq {
         sy * edge + sx
     }
 
+    #[allow(dead_code)]
     pub fn get_sector(&self, x: u16, y: u16) -> Option<&Sector> {
         let idx = self.get_index(x, y);
         self.sectors.get(idx)
@@ -138,6 +144,7 @@ impl SectorSeq {
         self.sectors.get(idx)
     }
 
+    #[allow(dead_code)]
     pub fn get_by_index_mut(&mut self, idx: usize) -> Option<&mut Sector> {
         self.sectors.get_mut(idx)
     }
@@ -180,7 +187,7 @@ impl SnakeBoundBox {
         for i in 0..sectors.len() {
             if let Some(sector) = sectors.get_by_index(i) {
                 let intersects_new = sector.intersect(&new_box);
-                let intersects_old = sector.intersect(&old_box);
+                let _intersects_old = sector.intersect(&old_box);
                 let is_present = self.bound_box.is_present(i);
 
                 if intersects_new && !is_present {
@@ -230,7 +237,7 @@ impl ViewPort {
         for i in 0..sectors.len() {
             if let Some(sector) = sectors.get_by_index(i) {
                 let intersects_new = sector.intersect(&new_box);
-                let intersects_old = sector.intersect(&old_box);
+                let _intersects_old = sector.intersect(&old_box);
                 let is_present = self.bound_box.is_present(i);
 
                 if intersects_new && !is_present {
