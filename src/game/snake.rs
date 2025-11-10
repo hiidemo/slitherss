@@ -346,7 +346,7 @@ impl Snake {
     pub fn update_snake_consts(&mut self) {
         let len = self.parts.len();
         self.gsc = 0.5 + 0.4 / (1.0 + (len as f32 - 1.0 + 16.0) / 36.0).max(1.0);
-        self.sc = (6.0).min(1.0 + (len as f32 - 2.0) / 106.0);
+        self.sc = (6.0_f32).min(1.0 + (len as f32 - 2.0) / 106.0);
         self.scang = 0.13 + 0.87 * ((7.0 - self.sc) / 6.0).powi(2);
         self.ssp = Self::NSP1 + Self::NSP2 * self.sc;
         self.fsp = self.ssp + 0.1;

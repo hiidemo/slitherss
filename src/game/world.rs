@@ -3,7 +3,8 @@ use crate::game::food::Food;
 use crate::game::math;
 use crate::game::sector::{BoundBoxPos, SectorSeq};
 use crate::game::snake::{Body, Snake};
-use rand::Rng;
+use rand::{Rng, SeedableRng};
+use rand::rngs::StdRng;
 use std::collections::HashMap;
 use std::f32::consts::PI;
 
@@ -17,7 +18,7 @@ pub struct World {
     ticks: i64,
     frames: u32,
     config: WorldConfig,
-    rng: rand::rngs::ThreadRng,
+    rng: StdRng,
 }
 
 impl World {
@@ -31,7 +32,7 @@ impl World {
             ticks: 0,
             frames: 0,
             config: WorldConfig::default(),
-            rng: rand::thread_rng(),
+            rng: StdRng::from_entropy(),
         }
     }
 
@@ -80,13 +81,13 @@ impl World {
         snake.skin = self.rng.gen_range(9..30);
 
         // Build snake parts
-        for i in 0..len.min(Snake::PARTS_SKIP_COUNT as u16 + Snake::PARTS_START_MOVE_COUNT as u16) {
+        for _ in 0..len.min(Snake::PARTS_SKIP_COUNT as u16 + Snake::PARTS_START_MOVE_COUNT as u16) {
             snake.parts.push(Body::new(x, y));
             x += angle.cos() * WorldConfig::MOVE_STEP_DISTANCE as f32;
             y += angle.sin() * WorldConfig::MOVE_STEP_DISTANCE as f32;
         }
 
-        for i in (Snake::PARTS_SKIP_COUNT + Snake::PARTS_START_MOVE_COUNT)..len as usize {
+        for _ in (Snake::PARTS_SKIP_COUNT + Snake::PARTS_START_MOVE_COUNT)..len as usize {
             snake.parts.push(Body::new(x, y));
             x += angle.cos() * Snake::TAIL_STEP_DISTANCE;
             y += angle.sin() * Snake::TAIL_STEP_DISTANCE;
@@ -145,8 +146,9 @@ impl World {
         }
 
         // Check bounds for changed snakes
-        for id in &self.changes {
-            self.check_snake_bounds(*id);
+        let changes_copy: Vec<SnakeId> = self.changes.clone();
+        for id in changes_copy {
+            self.check_snake_bounds(id);
         }
     }
 

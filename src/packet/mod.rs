@@ -407,14 +407,14 @@ impl PacketEnd {
 /// Parse incoming packet type from byte
 pub fn parse_in_packet_type(byte: u8) -> InPacketType {
     match byte {
-        0..=250 => InPacketType::Angle(byte),
-        251 => InPacketType::Ping,
         108 => InPacketType::RotLeft,
         114 => InPacketType::RotRight,
+        115 => InPacketType::UsernameSkin,
+        251 => InPacketType::Ping,
         253 => InPacketType::StartAcc,
         254 => InPacketType::StopAcc,
-        115 => InPacketType::UsernameSkin,
         255 => InPacketType::VictoryMessage,
+        0..=250 => InPacketType::Angle(byte),
         _ => InPacketType::Angle(0), // Default
     }
 }
